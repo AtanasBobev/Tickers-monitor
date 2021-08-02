@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;900&display=swap");
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.wrapper {
+  transition: 0.5s;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0)
+    url("https://unsplash.com/photos/rdwkamJlpiU/download?force=true&w=2400")
+    no-repeat scroll center center / cover;
+}
+form {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 30vw;
+  background-color: white;
+  padding: 1vmax;
+  border-radius: 0.5vmax;
+}
+.row {
+  width: 30vw;
+  display: flex;
+  flex-wrap: nowrap !important;
+}
+.row * {
+  width: 50%;
+}
+.center {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  background-color: white;
+  opacity: 0.9;
+  padding: 2vmax;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0.5vmax;
+}
+.add {
+  width: 25%;
+}
+.formClass {
+  width: 75% !important;
+}
+div p:hover {
+  text-decoration: line-through;
+  cursor: pointer;
+}
+.LogOut {
+}
+.btn-success {
+  font-size: 1.5vmax;
+}
+.special {
+  width: auto !important;
+}
+#root > div > div > div {
+  width: 38vw;
+}
+.shadowy {
+  font-size: 5vmax;
+  color: #121212;
+  font-weight: bolder;
+}
+.close {
+  position: absolute;
+  bottom: 1vmax;
+  right: 1vmax;
+}
+.chart {
+  height: 60vh;
+}
+.btn-group {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 3vmax;
+}
+.shadowy {
+  text-align: center;
+  width: 100%;
+}
+.centerData {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+/*.uploadButton {
+
+}
+*/
+.mainUpload * {
+  width: 100%;
+  margin-top: 2vmax;
+}
+.centerData {
+  justify-content: flex-start;
+}
+#root > div > div > div.center > div.mb-3.row.centerData > select {
+  width: 87%;
+  margin-right: 1vmax;
+  margin-left: 0.6vmax;
+  height: 3vmax;
+}
+#root > div > div > div.center > div.mb-3.row.centerData > button {
+  height: 3vmax;
+  width: 3vmax;
+}
+.menu {
+  width: 100vw !important;
+  height: 10vh;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0.8;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.menu:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  opacity: 1;
+}
+body > div:nth-child(4) > div.sc-bdnxRM.igqBJM > div > div > label {
+  width: 100vw;
+  text-align: center;
+}
+body > div:nth-child(4) > div.sc-bdnxRM.igqBJM > div > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
