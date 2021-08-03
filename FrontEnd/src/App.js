@@ -8,6 +8,8 @@ import "./App.css";
 import validator from "validator";
 import io from "socket.io-client";
 import ReactCircleModal from "react-circle-modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [logState, setLogState] = React.useState(1);
@@ -39,11 +41,27 @@ const App = () => {
 
   const ChangePass = () => {
     if (NewPassword !== NewPassword2) {
-      alert("Passwords do not match!");
+      toast.warn("Ops! Passwords do no match", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return false;
     }
     if (NewPassword.length < 7) {
-      alert("Your password must be at least 7 characters long!");
+      toast.warn("Your password must be at least 7 characters long!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return false;
     }
     axios
@@ -59,8 +77,30 @@ const App = () => {
           },
         }
       )
-      .then((data) => console.log(data))
-      .catch((err) => console.warn(err));
+      .then((data) => {
+        if (data.status == 200) {
+          toast.dark("Password updated successfully!", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+      .catch((err) => {
+        toast.error("Ops! Wrong password", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const setChoice = (e) => {
@@ -86,8 +126,32 @@ const App = () => {
         }
       )
       .then((res) => {
-        // then print response status
-        console.log(res.statusText);
+        if (res.status) {
+          toast.dark("Data uploaded successfully", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(
+          "There was an error uploading the data. Check your file extension and mind the 50mb per file limit!",
+          {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
       });
   };
 
@@ -126,12 +190,43 @@ const App = () => {
         let final = data.data;
         console.log(final);
         setHistoricData(final);
+        toast.dark("Data received successfully!", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((err) => {
+        toast.error(
+          "There was an error getting you the data. Maybe the server is down. Try again in a few minutes!",
+          {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
       });
   };
   const register = (e) => {
     e.preventDefault();
     if (!validator.isEmail(e.currentTarget.username.value)) {
-      alert("You have not entered an email!");
+      toast.warn("You have not entered an email!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return false;
     }
     axios
@@ -152,11 +247,27 @@ const App = () => {
   const login = (e) => {
     e.preventDefault();
     if (!validator.isEmail(e.currentTarget.username.value)) {
-      alert("You have not entered an email!");
+      toast.warn("You have not entered an email!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return false;
     }
     if (e.currentTarget.password.value.length < 7) {
-      alert("Your password must be at least 7 characters long!");
+      toast.warn("Your password must be at least 7 characters long!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     axios
       .request("http://localhost:5000/login", {
@@ -173,7 +284,17 @@ const App = () => {
           getTickers();
         }
       })
-      .catch((err) => alert("Wrong username or password!"));
+      .catch((err) =>
+        toast.error("Wrong email or password!", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      );
   };
   const getTickers = () => {
     axios
@@ -186,12 +307,36 @@ const App = () => {
         setTickers(data.data.rows);
       })
       .catch((err) => {
-        alert(
-          "Could not retrieve the list of data! \n Getting you back to login"
+        toast.error(
+          "Could not retrieve your data. Maybe the server is offline.",
+          {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
         );
         setLogState(2);
       });
   };
+  React.useEffect(() => {
+    try {
+      document
+        .getElementById("exampleColorInput")
+        .addEventListener("focus", function () {
+          // if(tog === true){
+          console.log("open");
+          // }else{
+          //     console.log('closed');
+          // }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   const deleteTicker = (id) => {
     axios
       .request("http://localhost:5000/tickers", {
@@ -212,7 +357,15 @@ const App = () => {
   };
   const addTicker = (id) => {
     if (tickers.some((el) => el.ticker_id == id)) {
-      alert("The value already exists!");
+      toast.warn("The ticker already exists", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else {
       axios
         .request("http://localhost:5000/tickers", {
@@ -236,9 +389,21 @@ const App = () => {
     setLogState(2);
     setTickers([]);
   };
+
   return (
     <div>
       <div className="wrapper">
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div style={{ backgroundColor: color }} className="menu">
           {logState == 3 ? (
             <ReactCircleModal
