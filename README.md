@@ -20,7 +20,9 @@ Below is a short description of each endpoint:
 - POST /login Logins the new user. Takes email and password(min. 7 symbols) and returns a json-web-token for further access to the endpoints. Code 400 is for data invalid. Code Code 500 is for error, usually caused by inability to access the database. 200 is for successful login.
 - GET /tickers Gets the tickers the user is subscribed to. `jwt` must be provided in the header. `ticker` must be proviede in the body. Code 401 is for no JWT sent. Code 200 is for successful request; an array of tickers is returned.
 - POST /tickers Updates the user tickers in the database. `jwt` must be provided in the header. Code 401 is for no JWT sent. Code 500 is for an internal server error, usually caused by an inability to connect to the database. Code 200 is for successful data entry.
-- Delete /tickers deletes given ticker from the user tickers in the database. JWT must be provided in the header. Code 401 is for no JWT sent. C
+- Delete /tickers deletes given ticker from the user tickers in the database. JWT must be provided in the header. `ticker_id` must be provided. Code 401 is for no JWT sent. Code 200 is for successful ticker deletion.
+- POST /history Loads historic data from the database. `jwt` must be provided in the header. In the body hours and ticker_id must be provided. Code 401 is for no `jwt` supplied. Code 200 is for successful requst. Data would be then returned in an array format. 
+- POST /file Posts historic data to the server a user .csv upload. ticker is provided in the body. In the files object provide SomeFile with the file. Multipart/form-data is used  `jwt` must be provided in the header. COde 400 is for missing data. Code 415 is for invalid data format. Code 200 is for successful upload to the server.
 **How to upload data in the Upload Data section**
 
 ## Screens:
