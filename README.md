@@ -12,6 +12,17 @@ To start the server, go to Server folder and with termianl run `npm run start` o
 
 Go to the sql file in the Database folder and execute the queries into PostgreSQL. Below is visualization of the database. Don't forget to edit the connection details in the postgres.js file in the Server folder.
 ![Database setup](https://i.ibb.co/CBCNZ61/Screenshot-2021-08-03-141236.png)
+
+## APIs
+You can view the avaible apis using swagger on port `5000` url `/api-docs`
+Below is a short description of each endpoint:
+- POST /register Registers a new user. Takes in the body email and password(min. 7 symbols). Code 400 is for data invalid. Code 200 is for successful registration.
+- POST /login Logins the new user. Takes email and password(min. 7 symbols) and returns a json-web-token for further access to the endpoints. Code 400 is for data invalid. Code Code 500 is for error, usually caused by inability to access the database. 200 is for successful login.
+- GET /tickers Gets the tickers the user is subscribed to. `jwt` must be provided in the header. `ticker` must be proviede in the body. Code 401 is for no JWT sent. Code 200 is for successful request; an array of tickers is returned.
+- POST /tickers Updates the user tickers in the database. `jwt` must be provided in the header. Code 401 is for no JWT sent. Code 500 is for an internal server error, usually caused by an inability to connect to the database. Code 200 is for successful data entry.
+- Delete /tickers deletes given ticker from the user tickers in the database. JWT must be provided in the header. Code 401 is for no JWT sent. C
+**How to upload data in the Upload Data section**
+
 ## Screens:
 Register the user:
 ![Ticker screen](https://i.ibb.co/fthj4c7/Screenshot-2021-08-02-162336.png)
