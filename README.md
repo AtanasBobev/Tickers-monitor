@@ -1,9 +1,18 @@
-# Tickers-monitor
+## Overview
 Ticker monitor is a fullstack app in node, express, react, PostgresSQL which fetches data from the bitmex web socket and allows the user to susbcribe to different tickers. 
 The flow is as follows:
 User is registered, JWT is created, the user is presented with a screen where they can choose among 5 tickers and subscribe to them. When the user subscribes, they can view historic infor that the node server has aggregated from the bitmex webscoket.
+## Installation
+**Front/Back end setup**
 
-Screens:
+To run the front end, go to the FrontEnd folder and inside it run with termianl `npm start`.
+To start the server, go to Server folder and with termianl run `npm run start` or `nodemon main.js`.
+
+**Database setup:**
+
+Go to the sql file in the Database folder and execute the queries into PostgreSQL. Below is visualization of the database. Don't forget to edit the connection details in the postgres.js file in the Server folder.
+![Database setup](https://i.ibb.co/CBCNZ61/Screenshot-2021-08-03-141236.png)
+## Screens:
 Register the user:
 ![Ticker screen](https://i.ibb.co/fthj4c7/Screenshot-2021-08-02-162336.png)
 Login the user:
