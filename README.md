@@ -1,5 +1,5 @@
 ## Overview
-Ticker monitor is a fullstack app in node, express, react, PostgresSQL which fetches data from the bitmex web socket and allows the user to susbcribe to different tickers. 
+Ticker monitor is a fullstack app in Node.js, Express, React, PostgresSQL (PERN stack) which fetches data from the bitmex web socket and allows the user to susbcribe to different tickers. 
 The flow is as follows:
 User is registered, JWT is created, the user is presented with a screen where they can choose among 5 tickers and subscribe to them. When the user subscribes, they can view historic infor that the node server has aggregated from the bitmex webscoket.
 ## Installation
@@ -10,21 +10,32 @@ To start the server, go to Server folder and with termianl run `npm run start` o
 
 **Database setup:**
 
-Go to the sql file in the Database folder and execute the queries into PostgreSQL. Below is visualization of the database. Don't forget to edit the connection details in the postgres.js file in the Server folder.
+Go to the sql file `db.sql` in the Database folder and execute the queries into PostgreSQL. Below is visualization of the database. Don't forget to edit the connection details in the postgres.js file in the Server folder.
 ![Database setup](https://i.ibb.co/CBCNZ61/Screenshot-2021-08-03-141236.png)
 
 ## APIs
 You can view the avaible apis using swagger on port `5000` url `/api-docs`
 Below is a short description of each endpoint:
-- POST /register Registers a new user. Takes in the body email and password(min. 7 symbols). Code 400 is for data invalid. Code 200 is for successful registration.
-- POST /login Logins the new user. Takes email and password(min. 7 symbols) and returns a json-web-token for further access to the endpoints. Code 400 is for data invalid. Code Code 500 is for error, usually caused by inability to access the database. 200 is for successful login.
-- GET /tickers Gets the tickers the user is subscribed to. `jwt` must be provided in the header. `ticker` must be proviede in the body. Code 401 is for no JWT sent. Code 200 is for successful request; an array of tickers is returned.
+- POST /register Registers a new user. Takes in the body `email` and `password`(min. 7 symbols). Code 400 is for data invalid. Code 200 is for successful registration.
+- POST /login Logins the new user. Takes `email` and `password`(min. 7 symbols) and returns a json-web-token for further access to the endpoints. Code 400 is for data invalid. Code Code 500 is for error, usually caused by inability to access the database. 200 is for successful login.
+- GET /tickers Gets the tickers the user is subscribed to. `jwt` must be provided in the header. `ticker` must be proviede in the body. Code 401 is for no `jwt` sent. Code 200 is for successful request; an array of tickers is returned.
 - POST /tickers Updates the user tickers in the database. `jwt` must be provided in the header. Code 401 is for no JWT sent. Code 500 is for an internal server error, usually caused by an inability to connect to the database. Code 200 is for successful data entry.
 - Delete /tickers deletes given ticker from the user tickers in the database. JWT must be provided in the header. `ticker_id` must be provided. Code 401 is for no JWT sent. Code 200 is for successful ticker deletion.
-- POST /history Loads historic data from the database. `jwt` must be provided in the header. In the body hours and ticker_id must be provided. Code 401 is for no `jwt` supplied. Code 200 is for successful requst. Data would be then returned in an array format. 
+- POST /history Loads historic data from the database. `jwt` must be provided in the header. In the body hours and `ticker_id` must be provided. Code 401 is for no `jwt` sent. Code 200 is for successful requst. Data would be then returned in an array format. 
 - POST /file Posts historic data to the server a user .csv upload. ticker is provided in the body. In the files object provide SomeFile with the file. Multipart/form-data is used  `jwt` must be provided in the header. COde 400 is for missing data. Code 415 is for invalid data format. Code 200 is for successful upload to the server.
-**How to upload data in the Upload Data section**
+- POST /changePassword changs the user current password. `jwt` must be provided in the header. The body should have oldPassword and newPassword(min. 7 symbols). Response 400 is for incomplete data. Response 200 is for successful change of password.
+- GET /colors gets the current color. `jwt` must be provided in the header. Response 401 is for invalid `jwt`. Response 200 is for successful request with a response of the hex color.
+- POST /colors provides color to be updated in the user recordin within the database. `jwt` must be provided in the header. color must be provided in the body. Reponse 200 is for successful request. Response 401 is for invalid `jwt`
 
+**How to upload data**
+In order to upload daya using POST /file API, your file should abide by the following criterias:
+- Be in .csv format
+- Have two columns, the first one is `Price` and the second one is `DataPub`.
+- The first column should have the price as a decimal
+- The second column should be in regular javascript `new Date()` format
+- The file size should not exceed 1 mb per file
+
+## Video walkthrough:
 ## Screens:
 Register the user:
 ![Ticker screen](https://i.ibb.co/fthj4c7/Screenshot-2021-08-02-162336.png)
