@@ -36,6 +36,11 @@ In order to upload daya using POST /file API, your file should abide by the foll
 - The file size should not exceed 1 mb per file
 
 ## Video walkthrough:
+
+
+https://user-images.githubusercontent.com/43994025/128134359-490eb13e-c3e1-437e-bfdd-9c60b772b155.mp4
+
+
 ## Screens:
 Register the user:
 ![Ticker screen](https://i.ibb.co/fthj4c7/Screenshot-2021-08-02-162336.png)
