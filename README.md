@@ -11,6 +11,7 @@ To start the server, go to Server folder and with termianl run `npm run start` o
 **Database setup:**
 
 Go to the sql file `db.sql` in the Database folder and execute the queries into PostgreSQL. Below is visualization of the database. Don't forget to edit the connection details in the postgres.js file in the Server folder.
+
 ![Database setup](https://i.ibb.co/CBCNZ61/Screenshot-2021-08-03-141236.png)
 
 ## APIs
